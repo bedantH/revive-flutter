@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:revive/components/tag_button.dart';
 import 'package:revive/pages/locations.dart';
+import 'package:revive/pages/search.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class BottomPanel extends StatefulWidget {
@@ -27,8 +28,8 @@ class _BottomPanelState extends State<BottomPanel> {
 
   @override
   Widget build(BuildContext context) {
-    const List<String> tabs = ["Locations", "Past Scans", "Forums"];
-    const List<IconData> icons = [Icons.location_on_outlined, Icons.history, Icons.forum_outlined];
+    const List<String> tabs = ["Search","Locations", "Past Scans", "Forums"];
+    const List<IconData> icons = [Icons.search,Icons.location_on_outlined, Icons.history, Icons.forum_outlined];
     _scrollController = ScrollController();
     _pageController = PageController();
 
@@ -95,6 +96,7 @@ class _BottomPanelState extends State<BottomPanel> {
                       });
                     },
                     children: [
+                      SearchLayout(scrollController: widget.scrollController),
                       LocationsLayout(scrollController: widget.scrollController),
                       Container(color: Colors.blue),
                       Container(color: Colors.green),

@@ -22,7 +22,7 @@ class TagButton extends StatelessWidget {
     return GestureDetector(
       onTap: onClick,
       child: Container(
-        margin: index == 0 ? const EdgeInsets.only(left: 20.0) : index == 2 ? const EdgeInsets.only(left: 10.0, right: 20.0) : const EdgeInsets.only(left: 10.0),
+        margin: index == 0 ? const EdgeInsets.only(left: 20.0) : index == 3 ? const EdgeInsets.only(left: 10.0, right: 20.0) : const EdgeInsets.only(left: 10.0),
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: bgColor,
