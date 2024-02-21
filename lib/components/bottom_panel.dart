@@ -5,10 +5,13 @@ import 'package:revive/pages/search.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class BottomPanel extends StatefulWidget {
-  final ScrollController scrollController;
   final PanelController panelController;
+  final ScrollController scrollController;
+  final List<Map<String, dynamic>> res;
 
-  const BottomPanel({super.key, required this.scrollController, required this.panelController});
+  const BottomPanel({super.key, required this.scrollController, required this.panelController,
+    required this.res
+  });
 
 
   @override
@@ -30,7 +33,7 @@ class _BottomPanelState extends State<BottomPanel> {
 
   @override
   Widget build(BuildContext context) {
-    const List<String> tabs = ["Search","Locations", "Past Scans", "Forums"];
+    const List<String> tabs = ["Search", "Locations", "Past Scans", "Forums"];
     const List<IconData> icons = [Icons.search,Icons.location_on_outlined, Icons.history, Icons.forum_outlined];
     _scrollController = ScrollController();
     _pageController = PageController();
@@ -101,7 +104,9 @@ class _BottomPanelState extends State<BottomPanel> {
                       });
                     },
                     children: [
-                      SearchLayout(scrollController: widget.scrollController),
+                      SearchLayout(scrollController: widget.scrollController,
+                          details:widget.res
+                      ),
                       LocationsLayout(scrollController: widget.scrollController),
                       Container(color: Colors.blue),
                       Container(color: Colors.green),

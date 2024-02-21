@@ -53,21 +53,21 @@ class Header extends StatelessWidget {
 
             Row(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: const Color(0xFFFBFADA),
-                      borderRadius: BorderRadius.circular(20.0)
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 12.0),
-                    child: Text("12,000", style: GoogleFonts.poppins(
-                        textStyle: const TextStyle(
-                            color: Color(0xFF12372A)
-                        )
-                    ),
-                    ),
-                  ),
-                ),
+                // Container(
+                //   decoration: BoxDecoration(
+                //       color: const Color(0xFFFBFADA),
+                //       borderRadius: BorderRadius.circular(20.0)
+                //   ),
+                //   child: Padding(
+                //     padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 12.0),
+                //     child: Text("12,000", style: GoogleFonts.poppins(
+                //         textStyle: const TextStyle(
+                //             color: Color(0xFF12372A)
+                //         )
+                //     ),
+                //     ),
+                //   ),
+                // ),
                 IconButton(onPressed: () {}, icon: const Icon(Icons.menu, color: Colors.white,))
               ],
             )

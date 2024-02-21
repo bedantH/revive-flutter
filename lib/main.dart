@@ -1,16 +1,17 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:revive/components/bottom_panel.dart';
+import 'package:revive/components/common/loading.dart';
 import 'package:revive/components/header.dart';
 import 'package:revive/components/search_button.dart';
-import 'package:revive/pages/forum.dart';
-import 'package:revive/pages/history.dart';
-import 'package:revive/pages/locations.dart';
+import 'package:revive/utils.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 late List<CameraDescription> cameras;
@@ -44,18 +45,21 @@ class CameraApp extends StatefulWidget {
 
   @override
   State<CameraApp> createState() => _CameraAppState();
-
-
 }
 
 class _CameraAppState extends State<CameraApp> {
   late CameraController _controller;
   final panelController = PanelController();
   bool freezeCam = false;
-  dynamic picture = null;
+  dynamic picture;
+
+  bool isLoading = false;
+  late final dio;
+  List<Map<String, dynamic>> res = [];
 
   @override
   void initState() {
+    dio = Dio();
     super.initState();
     _controller = CameraController(cameras[0], ResolutionPreset.max);
     _controller.initialize().then((_) {
@@ -92,6 +96,7 @@ class _CameraAppState extends State<CameraApp> {
         controller: panelController,
         color: const Color(0xFF8DA179),
         panelBuilder: (ScrollController controller) => BottomPanel(
+          res:res,
           scrollController: controller,
           panelController: panelController,
         ),
@@ -118,6 +123,7 @@ class _CameraAppState extends State<CameraApp> {
                   left: 50,
                   child: Image(image: AssetImage("images/scan.png"))
               ),
+              isLoading ? const Positioned(child: Loading()) : const SizedBox(),
               Positioned(bottom: 130, right: 150, left: 150, child: TakePictureButton(freezed:freezeCam&&picture!=null,onPressed: () async{
                 if(freezeCam&&picture!=null){
                   setState(() {
@@ -125,68 +131,79 @@ class _CameraAppState extends State<CameraApp> {
                   });
                 }
                 else{
-                if(!_controller.value.isInitialized){
-                  return null;
-                }
-                if(_controller.value.isTakingPicture){
-                  return null;
-                }
-                try{
-                  await _controller.setFlashMode(FlashMode.off);
-                  XFile pic = await _controller.takePicture();
+                  if(!_controller.value.isInitialized){
+                    return;
+                  }
+                  if(_controller.value.isTakingPicture){
+                    return;
+                  }
+                  try{
+                    await _controller.setFlashMode(FlashMode.off);
+                    XFile pic = await _controller.takePicture();
 
-                   //Xfile
-                  List<int> imageBytes = await pic.readAsBytes();
-                  String base64Image = base64Encode(imageBytes);
-                  setState(()  {
-                    picture = base64Image;
-                    freezeCam = true;
-                  });
-                  print("Image base64: $base64Image");
+                    List<int> imageBytes = await pic.readAsBytes();
+                    String base64Image = base64Encode(imageBytes);
+                    setState(()  {
+                      picture = base64Image;
+                      freezeCam = true;
+                    });
+
+                    try {
+                      setState(() {
+                        isLoading = true;
+                      });
+
+                      Response response = await dio.post('https://2c91-103-206-180-90.ngrok-free.app/ai/response/all/',
+                          options: Options(
+                            headers: {
+                              HttpHeaders.contentTypeHeader: "application/json"
+                            }
+                          ),
+                          data: {
+                            "location": "Panvel, Maharashtra",
+                            "mimeType": "image/jpeg",
+                            "image": base64Image,
+                          }
+                      );
 
 
-                } on CameraException catch(e){
-                  debugPrint("Error: $e");
-                  return null;
-                }
+                      if(response.data.toString() != "") {
+                        print("Response: ${response.data["message"]}");
+                        print(response.data['data']);
+                        setState(() {
+                          isLoading = false;
+                          if(response.data["code"]==200) {
+                            res = [
+                              {
+                                "title": 'recycle',
+                                "methods": [...response.data['data']["recycling_methods"]]
+                              },
+                              {
+                                "title": 'reuse',
+                                "methods": [...response.data['data']["reusing_methods"]]
+                              },
+                              {
+                                "title": 'nearest recycling stations',
+                                "station": [...response.data['data']["nearest_recycling_stations"]]
+                              },
+                            ];
+                            print(res);
+                          }
+                        });
+                        panelController.open();
+
+                      }
+                    } catch (e) {
+                      print("Error: $e");
+                    }
+                  } on CameraException catch(e){
+                    debugPrint("Error: $e");
+                    return;
+                  }
               }}))
             ])
         )
       )
     );
-  }
-}
-
-class ScanMarkerOverlayPainter extends CustomPainter {
-  @override
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..color = Colors.white
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke;
-
-    const double padding = 20.0;
-    const double cornerRadius = 8.0;
-    final double width = size.width - padding * 2;
-    final double height = size.height - padding * 2;
-
-    final Path path = Path()
-      ..moveTo(padding, padding + cornerRadius)
-      ..arcToPoint(const Offset(padding + cornerRadius, padding), radius: const Radius.circular(cornerRadius), clockwise: false)
-      ..lineTo(padding + width - cornerRadius, padding)
-      ..arcToPoint(Offset(padding + width, padding + cornerRadius), radius: const Radius.circular(cornerRadius), clockwise: false)
-      ..lineTo(padding + width, padding + height - cornerRadius)
-      ..arcToPoint(Offset(padding + width - cornerRadius, padding + height), radius: const Radius.circular(cornerRadius), clockwise: false)
-      ..lineTo(padding + cornerRadius, padding + height)
-      ..arcToPoint(Offset(padding, padding + height - cornerRadius), radius: const Radius.circular(cornerRadius), clockwise: false)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
   }
 }
