@@ -124,7 +124,7 @@ class _CameraAppState extends State<CameraApp> {
                     freezeCam=false;
                   });
                 }
-
+                else{
                 if(!_controller.value.isInitialized){
                   return null;
                 }
@@ -132,7 +132,7 @@ class _CameraAppState extends State<CameraApp> {
                   return null;
                 }
                 try{
-                  await _controller.setFlashMode(FlashMode.auto);
+                  await _controller.setFlashMode(FlashMode.off);
                   XFile pic = await _controller.takePicture();
 
                    //Xfile
@@ -149,7 +149,7 @@ class _CameraAppState extends State<CameraApp> {
                   debugPrint("Error: $e");
                   return null;
                 }
-              }))
+              }}))
             ])
         )
       )
