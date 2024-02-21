@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class TakePictureButton extends StatelessWidget {
   final VoidCallback onPressed;
+  final bool freezed;
 
-  const TakePictureButton({super.key, required this.onPressed});
+  const TakePictureButton({super.key, required this.onPressed, required this.freezed});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,10 @@ class TakePictureButton extends StatelessWidget {
       child: FloatingActionButton(
         onPressed: onPressed,
         backgroundColor: Colors.white,
-        child: const Icon(
+        child: freezed?const Icon(
+          Icons.close,
+          color: Colors.black,
+        ):const Icon(
           Icons.search,
           color: Colors.black,
         ),

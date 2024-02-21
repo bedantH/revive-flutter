@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -42,11 +44,15 @@ class CameraApp extends StatefulWidget {
 
   @override
   State<CameraApp> createState() => _CameraAppState();
+
+
 }
 
 class _CameraAppState extends State<CameraApp> {
   late CameraController _controller;
   final panelController = PanelController();
+  bool freezeCam = false;
+  dynamic picture = null;
 
   @override
   void initState() {
@@ -99,7 +105,10 @@ class _CameraAppState extends State<CameraApp> {
             child: Stack(children: [
               SizedBox(
                   height: double.infinity,
-                  child: CameraPreview(_controller)
+                  child: freezeCam&&picture!=null? Image.memory(
+                    base64Decode(picture),
+                    fit: BoxFit.cover,
+                  ) :CameraPreview(_controller)
               ),
               const Header(),
               const Positioned(
@@ -109,7 +118,38 @@ class _CameraAppState extends State<CameraApp> {
                   left: 50,
                   child: Image(image: AssetImage("images/scan.png"))
               ),
-              Positioned(bottom: 130, right: 150, left: 150, child: TakePictureButton(onPressed: () {}))
+              Positioned(bottom: 130, right: 150, left: 150, child: TakePictureButton(freezed:freezeCam&&picture!=null,onPressed: () async{
+                if(freezeCam&&picture!=null){
+                  setState(() {
+                    freezeCam=false;
+                  });
+                }
+
+                if(!_controller.value.isInitialized){
+                  return null;
+                }
+                if(_controller.value.isTakingPicture){
+                  return null;
+                }
+                try{
+                  await _controller.setFlashMode(FlashMode.auto);
+                  XFile pic = await _controller.takePicture();
+
+                   //Xfile
+                  List<int> imageBytes = await pic.readAsBytes();
+                  String base64Image = base64Encode(imageBytes);
+                  setState(()  {
+                    picture = base64Image;
+                    freezeCam = true;
+                  });
+                  print("Image base64: $base64Image");
+
+
+                } on CameraException catch(e){
+                  debugPrint("Error: $e");
+                  return null;
+                }
+              }))
             ])
         )
       )
