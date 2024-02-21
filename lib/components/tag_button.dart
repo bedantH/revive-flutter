@@ -7,6 +7,8 @@ class TagButton extends StatelessWidget {
   final IconData icon;
   final Color bgColor;
   final int index;
+  final Color iconColor;
+  final Color textColor;
 
   const TagButton({
     super.key,
@@ -14,7 +16,9 @@ class TagButton extends StatelessWidget {
     required this.icon,
     required this.onClick,
     required this.bgColor,
+    required this.iconColor,
     required this.index,
+    required this.textColor
   });
 
   @override
@@ -35,12 +39,12 @@ class TagButton extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Icon(icon, color: Colors.white, size: 20.0,),
+              Icon(icon, color: iconColor, size: 20.0,),
               const SizedBox(width: 10.0),
               Text(text, style: GoogleFonts.poppins(
                 textStyle: const TextStyle(
                   fontSize: 13.0,
-                  color: Colors.white, // Set the color to white
+                  color: Color(0xFFFFFFFF), // Set the color to white
                 ),
               ))
             ],

@@ -10,6 +10,7 @@ class BottomPanel extends StatefulWidget {
 
   const BottomPanel({super.key, required this.scrollController, required this.panelController});
 
+
   @override
   State<BottomPanel> createState() => _BottomPanelState();
 }
@@ -18,6 +19,7 @@ class _BottomPanelState extends State<BottomPanel> {
   int activeIndex = 0;
   late ScrollController _scrollController;
   late PageController _pageController;
+
 
   @override
   void initState() {
@@ -51,7 +53,8 @@ class _BottomPanelState extends State<BottomPanel> {
       children: [
         Container(
             decoration: const BoxDecoration(
-                color: Color(0xFF8DA179),
+                //color: Color(0xFFF5FCF6),
+                color: Color(0xFFFFFFFF),
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0))
             ),
             child: Column(
@@ -78,7 +81,9 @@ class _BottomPanelState extends State<BottomPanel> {
                                   _pageController.jumpToPage(index);
                                 });
                               },
-                              bgColor: activeIndex == index ?  const Color(0xFF1E4B3C) : const Color(0xFF436850),
+                              bgColor: activeIndex == index ?  const Color(0xFF2CB57B) : const Color(0xFFE5F8F0),
+                              iconColor: activeIndex == index ?  const Color(0xFFFFFFFF) : const Color(0xFF2CB57B),
+                              textColor: activeIndex == index ?  const Color(0xFFFFFFFF) : const Color(0xFF2CB57B),
                             ),
                           ],
                         );
@@ -133,5 +138,4 @@ class _BottomPanelState extends State<BottomPanel> {
     ),
   );
 }
-
 
