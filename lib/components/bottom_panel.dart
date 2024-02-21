@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:revive/components/tag_button.dart';
+import 'package:revive/pages/history.dart';
 import 'package:revive/pages/locations.dart';
 import 'package:revive/pages/search.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -9,9 +10,10 @@ class BottomPanel extends StatefulWidget {
   final ScrollController scrollController;
   final List<Map<String, dynamic>> res;
   final List<Map<String, dynamic>> vid_res;
+  final List<dynamic> prevResult;
 
   const BottomPanel({super.key, required this.scrollController, required this.panelController,
-    required this.res, required this.vid_res
+    required this.res, required this.prevResult, required this.vid_res
   });
 
   @override
@@ -105,7 +107,7 @@ class _BottomPanelState extends State<BottomPanel> {
                           videos: widget.vid_res,
                       ),
                       LocationsLayout(scrollController: widget.scrollController),
-                      Container(color: Colors.blue),
+                      HistoryLayout(scrollController: widget.scrollController, prevResult: widget.prevResult),
                       Container(color: Colors.green),
                     ],
                   ),

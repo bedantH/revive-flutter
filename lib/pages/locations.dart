@@ -52,6 +52,7 @@ class LocationsLayout extends StatelessWidget {
   final ScrollController scrollController;
   const LocationsLayout({super.key, required this.scrollController});
 
+
   @override
   Widget build(BuildContext context) {
     return Container(
