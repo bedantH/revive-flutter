@@ -134,4 +134,3 @@ class _BottomPanelState extends State<BottomPanel> {
   );
 }
 
-
