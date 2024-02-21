@@ -14,6 +14,7 @@ class TakePictureButton extends StatelessWidget {
       child: FloatingActionButton(
         onPressed: onPressed,
         backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(side: const BorderSide(width: 3,color: Colors.white),borderRadius: BorderRadius.circular(100)),
         child: freezed?const Icon(
           Icons.close,
           color: Colors.black,

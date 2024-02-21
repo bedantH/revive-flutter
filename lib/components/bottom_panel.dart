@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:revive/components/tag_button.dart';
 import 'package:revive/pages/locations.dart';
@@ -9,10 +11,11 @@ class BottomPanel extends StatefulWidget {
   final ScrollController scrollController;
   final List<Map<String, dynamic>> res;
 
-  const BottomPanel({super.key, required this.scrollController, required this.panelController,
-    required this.res
-  });
-
+  const BottomPanel(
+      {super.key,
+      required this.scrollController,
+      required this.panelController,
+      required this.res});
 
   @override
   State<BottomPanel> createState() => _BottomPanelState();
@@ -22,7 +25,6 @@ class _BottomPanelState extends State<BottomPanel> {
   int activeIndex = 0;
   late ScrollController _scrollController;
   late PageController _pageController;
-
 
   @override
   void initState() {
@@ -34,7 +36,12 @@ class _BottomPanelState extends State<BottomPanel> {
   @override
   Widget build(BuildContext context) {
     const List<String> tabs = ["Search", "Locations", "Past Scans", "Forums"];
-    const List<IconData> icons = [Icons.search,Icons.location_on_outlined, Icons.history, Icons.forum_outlined];
+    const List<IconData> icons = [
+      Icons.search,
+      Icons.location_on_outlined,
+      Icons.history,
+      Icons.forum_outlined
+    ];
     _scrollController = ScrollController();
     _pageController = PageController();
 
@@ -56,10 +63,10 @@ class _BottomPanelState extends State<BottomPanel> {
       children: [
         Container(
             decoration: const BoxDecoration(
-                //color: Color(0xFFF5FCF6),
                 color: Color(0xFFFFFFFF),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0))
-            ),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20.0),
+                    topRight: Radius.circular(20.0))),
             child: Column(
               children: [
                 buildHandle(),
@@ -84,9 +91,15 @@ class _BottomPanelState extends State<BottomPanel> {
                                   _pageController.jumpToPage(index);
                                 });
                               },
-                              bgColor: activeIndex == index ?  const Color(0xFF2CB57B) : const Color(0xFFE5F8F0),
-                              iconColor: activeIndex == index ?  const Color(0xFFFFFFFF) : const Color(0xFF2CB57B),
-                              textColor: activeIndex == index ?  const Color(0xFFFFFFFF) : const Color(0xFF2CB57B),
+                              bgColor: activeIndex == index
+                                  ? const Color(0xFF57b278)
+                                  : const Color(0xFFDCEFE3),
+                              iconColor: activeIndex == index
+                                  ? const Color(0xFFFFFFFF)
+                                  : const Color(0xFF2CB57B),
+                              textColor: activeIndex == index
+                                  ? const Color(0xFFFFFFFF)
+                                  : const Color(0xFF2CB57B),
                             ),
                           ],
                         );
@@ -104,43 +117,39 @@ class _BottomPanelState extends State<BottomPanel> {
                       });
                     },
                     children: [
-                      SearchLayout(scrollController: widget.scrollController,
-                          details:widget.res
-                      ),
-                      LocationsLayout(scrollController: widget.scrollController),
+                      SearchLayout(
+                          scrollController: widget.scrollController,
+                          details: widget.res),
+                      LocationsLayout(
+                          scrollController: widget.scrollController),
                       Container(color: Colors.blue),
                       Container(color: Colors.green),
                     ],
                   ),
                 ),
               ],
-            )
-        ),
+            )),
       ],
     );
   }
 
   void togglePanel() => {
-    if (widget.panelController.isPanelOpen) {
-      widget.panelController.close()
-    } else {
-      widget.panelController.open()
-    }
-  };
+        if (widget.panelController.isPanelOpen)
+          {widget.panelController.close()}
+        else
+          {widget.panelController.open()}
+      };
 
   Widget buildHandle() => GestureDetector(
-    onTap: togglePanel,
-    child: Center(
-      child: Container(
-        width: 50,
-        height: 5,
-        margin: const EdgeInsets.only(top: 10),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20.0)
+        onTap: togglePanel,
+        child: Center(
+          child: Container(
+            width: 50,
+            height: 5,
+            margin: const EdgeInsets.only(top: 10),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(20.0)),
+          ),
         ),
-      ),
-    ),
-  );
+      );
 }
-

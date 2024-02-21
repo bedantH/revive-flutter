@@ -42,9 +42,9 @@ class TagButton extends StatelessWidget {
               Icon(icon, color: iconColor, size: 20.0,),
               const SizedBox(width: 10.0),
               Text(text, style: GoogleFonts.poppins(
-                textStyle: const TextStyle(
+                textStyle:  TextStyle(
                   fontSize: 13.0,
-                  color: Color(0xFFFFFFFF), // Set the color to white
+                  color: textColor, // Set the color to white
                 ),
               ))
             ],

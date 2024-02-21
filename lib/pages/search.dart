@@ -165,7 +165,7 @@ class SearchLayout extends StatelessWidget {
                                         itemCount: cur["steps"]?.length ?? 0,
                                         itemBuilder: (BuildContext context, int index){
                                           String curStep = cur["steps"][index];
-                                          return Text((index+1).toString()+". "+curStep);
+                                          return Text("${index+1}. $curStep");
                                         }
                                     ),
 
