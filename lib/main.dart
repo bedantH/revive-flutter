@@ -95,8 +95,8 @@ class _CameraAppState extends State<CameraApp> {
         controller: panelController,
         color: const Color(0xFF8DA179),
         panelBuilder: (ScrollController controller) => BottomPanel(
-          scrollController: controller,
           panelController: panelController,
+          scrollController: controller,
         ),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20.0)),
         minHeight: panelHeightClosed,

@@ -141,7 +141,6 @@ class SearchLayout extends StatelessWidget {
                           child: ListView.builder(
                               physics: const ClampingScrollPhysics(),
                               shrinkWrap: true,
-                              controller: scrollController,
                               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 3.0),
                               itemCount: current["methods"]!=null?current["methods"].length:0,
                               itemBuilder: (BuildContext context, int index){
@@ -158,7 +157,7 @@ class SearchLayout extends StatelessWidget {
                                     ListView.builder(
                                         physics: const ClampingScrollPhysics(),
                                         shrinkWrap: true,
-                                        controller: scrollController,
+                                        // controller: scrollController,
                                         padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 3.0),
                                         itemCount: cur["steps"]?.length ?? 0,
                                         itemBuilder: (BuildContext context, int index){
@@ -170,7 +169,6 @@ class SearchLayout extends StatelessWidget {
                                     ListView.builder(
                                         physics: const ClampingScrollPhysics(),
                                         shrinkWrap: true,
-                                        controller: scrollController,
                                         padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 3.0),
                                         itemCount: cur["resources"]?.length ?? 0,
                                         itemBuilder: (BuildContext context, int index){
@@ -219,7 +217,6 @@ class SearchLayout extends StatelessWidget {
                           child:  ListView.builder(
                               physics: const ClampingScrollPhysics(),
                               shrinkWrap: true,
-                              controller: scrollController,
                               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 3.0),
                               itemCount: current["station"]!=null?current["station"].length:0,
                               itemBuilder: (BuildContext context, int index){
@@ -245,9 +242,6 @@ class SearchLayout extends StatelessWidget {
                                         ),
                                       ),
                                     const Text("")
-
-
-
                                   ],
                                 );
 
