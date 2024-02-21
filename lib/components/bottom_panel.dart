@@ -7,8 +7,11 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 class BottomPanel extends StatefulWidget {
   final ScrollController scrollController;
   final PanelController panelController;
+  final List<Map<String, dynamic>> res;
 
-  const BottomPanel({super.key, required this.scrollController, required this.panelController});
+  const BottomPanel({super.key, required this.scrollController, required this.panelController,
+    required this.res
+  });
 
   @override
   State<BottomPanel> createState() => _BottomPanelState();
@@ -96,7 +99,9 @@ class _BottomPanelState extends State<BottomPanel> {
                       });
                     },
                     children: [
-                      SearchLayout(scrollController: widget.scrollController),
+                      SearchLayout(scrollController: widget.scrollController,
+                          details:widget.res
+                      ),
                       LocationsLayout(scrollController: widget.scrollController),
                       Container(color: Colors.blue),
                       Container(color: Colors.green),

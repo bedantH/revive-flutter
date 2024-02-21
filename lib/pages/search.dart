@@ -6,94 +6,97 @@ import 'package:revive/components/common/location_card.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-List<Map<String, dynamic>> details = [
-  {
-    "title":"recycle",
-    "methods": [
-      {
-        "name": "Bottle-to-bottle recycling",
-        "steps": [
-          "Rinse the bottle to remove any residual liquid.",
-          "Remove the cap and label.",
-          "Flatten the bottle by stepping on it or running it over with a car.",
-          "Place the bottle in a recycling bin or take it to a recycling center."
-        ],
-        "resources": [
-          "https://www.wikihow.com/Recycle-Plastic-Bottles",
-          "https://www.youtube.com/watch?v=9h12345678"
-        ]
-      },
-      {
-        "name": "Chemical recycling",
-        "steps": [
-          "Collect and sort the plastic bottles.",
-          "Shred the bottles into small pieces.",
-          "Heat the pieces to a high temperature in the absence of oxygen.",
-          "Cool the resulting liquid and collect the plastic.",
-          "Purify the plastic and use it to create new products."
-        ],
-        "resources": [
-          "https://www.bpf.co.uk/plastics-循環/chemical-recycling.aspx",
-          "https://www.youtube.com/watch?v=9h12345678"
-        ]
-      }
-    ]
-  },
-  {
-    "title":"reuse",
-    "methods": [
-      {
-        "name": "Use as a plant pot",
-        "steps": [
-          "Cut the bottle in half.",
-          "Fill the bottom half with soil.",
-          "Plant a seed or seedling in the soil.",
-          "Water the plant regularly."
-        ],
-        "resources": [
-          "https://www.wikihow.com/Make-a-Plastic-Bottle-Planter",
-          "https://www.youtube.com/watch?v=9h12345678"
-        ]
-      },
-      {
-        "name": "Use as a storage container",
-        "steps": [
-          "Clean the bottle thoroughly.",
-          "Remove the cap and label.",
-          "Use the bottle to store small items such as screws, nails, or paper clips.",
-          "You can also use the bottle to store liquids such as water or juice."
-        ],
-        "resources": [
-          "https://www.wikihow.com/Reuse-Plastic-Bottles",
-          "https://www.youtube.com/watch?v=9h12345678"
-        ]
-      }
-    ]
-  },
-  {
-    "title":'nearest recycling stations',
-    "station": [
-      {
-        "name": "Panvel Municipal Corporation Recycling Center",
-        "address": "Plot No. 123, Sector 4, Panvel, Maharashtra 410206",
-        "distance": "1.5 km",
-        "contact": "022-27412345",
-        "map_link": "https://goo.gl/maps/9h12345678"
-      },
-      {
-        "name": "Shree Ganesh Recycling Center",
-        "address": "Plot No. 456, Sector 5, Panvel, Maharashtra 410206",
-        "distance": "2.5 km",
-        "contact": "022-27412345",
-        "map_link": "https://goo.gl/maps/9h12345678"
-      }
-    ]
-  }
-];
+// List<Map<String, dynamic>> details = [
+//   {
+//     "title":"recycle",
+//     "methods": [
+//       {
+//         "name": "Bottle-to-bottle recycling",
+//         "steps": [
+//           "Rinse the bottle to remove any residual liquid.",
+//           "Remove the cap and label.",
+//           "Flatten the bottle by stepping on it or running it over with a car.",
+//           "Place the bottle in a recycling bin or take it to a recycling center."
+//         ],
+//         "resources": [
+//           "https://www.wikihow.com/Recycle-Plastic-Bottles",
+//           "https://www.youtube.com/watch?v=9h12345678"
+//         ]
+//       },
+//       {
+//         "name": "Chemical recycling",
+//         "steps": [
+//           "Collect and sort the plastic bottles.",
+//           "Shred the bottles into small pieces.",
+//           "Heat the pieces to a high temperature in the absence of oxygen.",
+//           "Cool the resulting liquid and collect the plastic.",
+//           "Purify the plastic and use it to create new products."
+//         ],
+//         "resources": [
+//           "https://www.bpf.co.uk/plastics-循環/chemical-recycling.aspx",
+//           "https://www.youtube.com/watch?v=9h12345678"
+//         ]
+//       }
+//     ]
+//   },
+//   {
+//     "title":"reuse",
+//     "methods": [
+//       {
+//         "name": "Use as a plant pot",
+//         "steps": [
+//           "Cut the bottle in half.",
+//           "Fill the bottom half with soil.",
+//           "Plant a seed or seedling in the soil.",
+//           "Water the plant regularly."
+//         ],
+//         "resources": [
+//           "https://www.wikihow.com/Make-a-Plastic-Bottle-Planter",
+//           "https://www.youtube.com/watch?v=9h12345678"
+//         ]
+//       },
+//       {
+//         "name": "Use as a storage container",
+//         "steps": [
+//           "Clean the bottle thoroughly.",
+//           "Remove the cap and label.",
+//           "Use the bottle to store small items such as screws, nails, or paper clips.",
+//           "You can also use the bottle to store liquids such as water or juice."
+//         ],
+//         "resources": [
+//           "https://www.wikihow.com/Reuse-Plastic-Bottles",
+//           "https://www.youtube.com/watch?v=9h12345678"
+//         ]
+//       }
+//     ]
+//   },
+//   {
+//     "title":'nearest recycling stations',
+//     "station": [
+//       {
+//         "name": "Panvel Municipal Corporation Recycling Center",
+//         "address": "Plot No. 123, Sector 4, Panvel, Maharashtra 410206",
+//         "distance": "1.5 km",
+//         "contact": "022-27412345",
+//         "map_link": "https://goo.gl/maps/9h12345678"
+//       },
+//       {
+//         "name": "Shree Ganesh Recycling Center",
+//         "address": "Plot No. 456, Sector 5, Panvel, Maharashtra 410206",
+//         "distance": "2.5 km",
+//         "contact": "022-27412345",
+//         "map_link": "https://goo.gl/maps/9h12345678"
+//       }
+//     ]
+//   }
+// ];
 
 class SearchLayout extends StatelessWidget {
   final ScrollController scrollController;
-  const SearchLayout({super.key, required this.scrollController});
+  final List<Map<String, dynamic>> details;
+  const SearchLayout({super.key, required this.scrollController,
+    required this.details
+  });
 
   @override
   Widget build(BuildContext context) {

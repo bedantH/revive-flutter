@@ -55,6 +55,7 @@ class _CameraAppState extends State<CameraApp> {
 
   bool isLoading = false;
   late final dio;
+  List<Map<String, dynamic>> res = [];
 
   @override
   void initState() {
@@ -95,6 +96,7 @@ class _CameraAppState extends State<CameraApp> {
         controller: panelController,
         color: const Color(0xFF8DA179),
         panelBuilder: (ScrollController controller) => BottomPanel(
+          res:res,
           scrollController: controller,
           panelController: panelController,
         ),
@@ -164,11 +166,32 @@ class _CameraAppState extends State<CameraApp> {
                           }
                       );
 
+
                       if(response.data.toString() != "") {
                         print("Response: ${response.data["message"]}");
+                        print(response.data['data']);
                         setState(() {
                           isLoading = false;
+                          if(response.data["code"]==200) {
+                            res = [
+                              {
+                                "title": 'recycle',
+                                "methods": [...response.data['data']["recycling_methods"]]
+                              },
+                              {
+                                "title": 'reuse',
+                                "methods": [...response.data['data']["reusing_methods"]]
+                              },
+                              {
+                                "title": 'nearest recycling stations',
+                                "station": [...response.data['data']["nearest_recycling_stations"]]
+                              },
+                            ];
+                            print(res);
+                          }
                         });
+                        panelController.open();
+
                       }
                     } catch (e) {
                       print("Error: $e");
