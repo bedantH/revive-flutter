@@ -56,6 +56,7 @@ class _CameraAppState extends State<CameraApp> {
   bool isLoading = false;
   late final dio;
   List<Map<String, dynamic>> res = [];
+  List<Map<String, dynamic>> vid_res = [];
 
   @override
   void initState() {
@@ -97,6 +98,7 @@ class _CameraAppState extends State<CameraApp> {
         color: const Color(0xFF8DA179),
         panelBuilder: (ScrollController controller) => BottomPanel(
           res:res,
+          vid_res: vid_res,
           scrollController: controller,
           panelController: panelController,
         ),
@@ -170,6 +172,9 @@ class _CameraAppState extends State<CameraApp> {
                       if(response.data.toString() != "") {
                         print("Response: ${response.data["message"]}");
                         print(response.data['data']);
+
+                        Response videos = await dio.get('https://2c91-103-206-180-90.ngrok-free.app/search?q=recycle ${response.data['data']['object']}');
+
                         setState(() {
                           isLoading = false;
                           if(response.data["code"]==200) {
@@ -182,12 +187,12 @@ class _CameraAppState extends State<CameraApp> {
                                 "title": 'reuse',
                                 "methods": [...response.data['data']["reusing_methods"]]
                               },
-                              {
-                                "title": 'nearest recycling stations',
-                                "station": [...response.data['data']["nearest_recycling_stations"]]
-                              },
                             ];
-                            print(res);
+                          }
+
+                          if (videos.statusCode == 200) {
+                            vid_res = [...videos.data["items"]];
+                            print(vid_res);
                           }
                         });
                         panelController.open();

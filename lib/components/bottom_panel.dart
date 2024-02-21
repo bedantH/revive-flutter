@@ -8,9 +8,10 @@ class BottomPanel extends StatefulWidget {
   final PanelController panelController;
   final ScrollController scrollController;
   final List<Map<String, dynamic>> res;
+  final List<Map<String, dynamic>> vid_res;
 
   const BottomPanel({super.key, required this.scrollController, required this.panelController,
-    required this.res
+    required this.res, required this.vid_res
   });
 
   @override
@@ -100,7 +101,8 @@ class _BottomPanelState extends State<BottomPanel> {
                     },
                     children: [
                       SearchLayout(scrollController: widget.scrollController,
-                          details:widget.res
+                          details:widget.res,
+                          videos: widget.vid_res,
                       ),
                       LocationsLayout(scrollController: widget.scrollController),
                       Container(color: Colors.blue),
