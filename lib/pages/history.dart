@@ -3,51 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:revive/components/common/history_card.dart';
 
-List<Map<String, dynamic>> recyclingCenters = [
-  {
-    "name": "Panvel Municipal Corporation Recycling Center",
-    "address": "Plot No. 123, Sector 4, Panvel, Maharashtra 410206",
-    "distance": "1.5 km",
-    "contact": "022-27412345",
-    "map_link": "https://goo.gl/maps/9h12345678"
-  },
-  {
-    "name": "Shree Ganesh Recycling Center",
-    "address": "Plot No. 456, Sector 5, Panvel, Maharashtra 410206",
-    "distance": "2.5 km",
-    "contact": "022-27412345",
-    "map_link": "https://goo.gl/maps/9h12345678"
-  },
-  {
-    "name": "Shree Ganesh Recycling Center",
-    "address": "Plot No. 456, Sector 5, Panvel, Maharashtra 410206",
-    "distance": "2.5 km",
-    "contact": "022-27412345",
-    "map_link": "https://goo.gl/maps/9h12345678"
-  },
-  {
-    "name": "Shree Ganesh Recycling Center",
-    "address": "Plot No. 456, Sector 5, Panvel, Maharashtra 410206",
-    "distance": "2.5 km",
-    "contact": "022-27412345",
-    "map_link": "https://goo.gl/maps/9h12345678"
-  },
-  {
-    "name": "Shree Ganesh Recycling Center",
-    "address": "Plot No. 456, Sector 5, Panvel, Maharashtra 410206",
-    "distance": "2.5 km",
-    "contact": "022-27412345",
-    "map_link": "https://goo.gl/maps/9h12345678"
-  },
-  {
-    "name": "Shree Ganesh Recycling Center",
-    "address": "Plot No. 456, Sector 5, Panvel, Maharashtra 410206",
-    "distance": "2.5 km",
-    "contact": "022-27412345",
-    "map_link": "https://goo.gl/maps/9h12345678"
-  }
-];
-
 class HistoryLayout extends StatelessWidget {
 
   final ScrollController scrollController;
@@ -57,8 +12,6 @@ class HistoryLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(prevResult);
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15.0),
       child: Column(
@@ -83,7 +36,7 @@ class HistoryLayout extends StatelessWidget {
                 shrinkWrap: true,
                 controller: scrollController,
                 padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 3.0),
-                itemCount: (prevResult??[]).length,
+                itemCount: prevResult.length,
                 itemBuilder: (BuildContext context, int index) {
                   Map<String, dynamic> current = prevResult[index];
 

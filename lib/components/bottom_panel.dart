@@ -40,12 +40,11 @@ class _BottomPanelState extends State<BottomPanel> {
 
   @override
   Widget build(BuildContext context) {
-    const List<String> tabs = ["Search", "Locations", "Past Scans", "Forums"];
+    const List<String> tabs = ["Search", "Locations", "Past Scans"];
     const List<IconData> icons = [
       Icons.search,
       Icons.location_on_outlined,
       Icons.history,
-      Icons.forum_outlined
     ];
     _scrollController = ScrollController();
     _pageController = PageController();
@@ -132,7 +131,6 @@ class _BottomPanelState extends State<BottomPanel> {
                       HistoryLayout(
                           scrollController: widget.scrollController,
                           prevResult: widget.prevResult),
-                      Container(color: Colors.green),
                     ],
                   ),
                 ),

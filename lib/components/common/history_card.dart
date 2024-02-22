@@ -4,27 +4,20 @@ import 'package:url_launcher/url_launcher.dart';
 
 class HistoryCard extends StatelessWidget {
   final dynamic item;
-  // final String address;
-  // final String distance;
-  // final String contact;
-  // final String mapLink;
 
   const HistoryCard({super.key,
     required this.item,
-    // required this.address,
-    // required this.distance,
-    // required this.contact,
-    // required this.mapLink
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
         color: Colors.white,
+        border: Border.all(color: const Color(0x1F019344)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +47,6 @@ class HistoryCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
           ),
-
           Text(
             item['response'][0]['methods'][0]['name'],
             style: GoogleFonts.poppins(
@@ -117,71 +109,6 @@ class HistoryCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
           ),
-          // Container(
-          //   margin: const EdgeInsets.symmetric(vertical: 4.0),
-          //   padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
-          //   decoration: BoxDecoration(
-          //       color: const Color(0xFF12372A),
-          //       borderRadius: BorderRadius.circular(12.0)
-          //   ),
-          //   child:
-          //   Text(
-          //     distance,
-          //     style: GoogleFonts.poppins(
-          //         textStyle: const TextStyle(
-          //             color: Colors.white,
-          //             fontSize: 12.0,
-          //             fontWeight: FontWeight.w400
-          //         )
-          //     ),
-          //     overflow: TextOverflow.ellipsis,
-          //     maxLines: 2,
-          //   ),
-          // ),
-          // const SizedBox(height: 20),
-          // Row(
-          //   children: [
-          //     const Icon(Icons.phone, color: Color(0xFF12372A), size: 18,),
-          //     const SizedBox(width: 10.0),
-          //     Text(
-          //       contact,
-          //       style: GoogleFonts.poppins(
-          //           textStyle: const TextStyle(
-          //               color: Color(0xFF12372A),
-          //               fontSize: 13.0,
-          //               fontWeight: FontWeight.w400
-          //           )
-          //       ),
-          //       overflow: TextOverflow.ellipsis,
-          //       maxLines: 2,
-          //     ),
-          //   ],
-          // ),
-          // const SizedBox(height: 10),
-          // Row(
-          //   children: [
-          //     const Icon(Icons.location_on_outlined, color: Color(0xFF12372A), size: 18,),
-          //     const SizedBox(width: 10.0),
-          //     GestureDetector(
-          //       onTap: () {
-          //         _launchUrl(Uri.parse(mapLink));
-          //       },
-          //       child: Text(
-          //         mapLink,
-          //         style: GoogleFonts.poppins(
-          //             textStyle: const TextStyle(
-          //                 color: Color(0xFF12372A),
-          //                 fontSize: 13.0,
-          //                 fontWeight: FontWeight.w400,
-          //                 decoration: TextDecoration.underline
-          //             )
-          //         ),
-          //         overflow: TextOverflow.ellipsis,
-          //         maxLines: 2,
-          //       ),
-          //     )
-          //   ],
-          // )
         ],
       ),
     );

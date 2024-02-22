@@ -29,7 +29,7 @@ class Utils {
         return SimpleDialog(
           elevation: 0.0,
           backgroundColor: Colors.white
-              .withOpacity(0), // can change this to your prefered color
+              .withOpacity(0), // can change this to your preferred color
           children: <Widget>[
             Center(
                 child: Container(
@@ -37,7 +37,7 @@ class Utils {
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: const Padding(
-                      padding: EdgeInsets.all(12.0),
+                      padding: EdgeInsets.symmetric(vertical: 22.0, horizontal: 12.0),
                       child: Column(
                         children: <Widget>[
                           SizedBox(
