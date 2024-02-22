@@ -35,6 +35,7 @@ class HistoryCard extends StatelessWidget {
             maxLines: 2,
           ),
           const SizedBox(height: 10),
+          item['response'][0]['methods'].length>0?
           Text(
             "Recycle",
             style: GoogleFonts.poppins(
@@ -46,7 +47,8 @@ class HistoryCard extends StatelessWidget {
             ),
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
-          ),
+          ):const SizedBox(height: 0),
+          item['response'][0]['methods'].length>0?
           Text(
             item['response'][0]['methods'][0]['name'],
             style: GoogleFonts.poppins(
@@ -58,8 +60,8 @@ class HistoryCard extends StatelessWidget {
             ),
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
-          ),
-          Text(
+          ):const SizedBox(height: 0),
+          item['response'][0]['methods'].length>1?Text(
             item['response'][0]['methods'][1]['name'],
             style: GoogleFonts.poppins(
                 textStyle: const TextStyle(
@@ -70,9 +72,10 @@ class HistoryCard extends StatelessWidget {
             ),
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
-          ),
+          ):const SizedBox(height: 0),
 
           const SizedBox(height: 10),
+          item['response'][1]['methods'].length>0?
           Text(
             "Reuse",
             style: GoogleFonts.poppins(
@@ -84,7 +87,8 @@ class HistoryCard extends StatelessWidget {
             ),
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
-          ),
+          ):const SizedBox(height: 0),
+          item['response'][1]['methods'].length>0?
           Text(
             item['response'][1]['methods'][0]['name'],
             style: GoogleFonts.poppins(
@@ -96,7 +100,8 @@ class HistoryCard extends StatelessWidget {
             ),
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
-          ),
+          ):const SizedBox(height: 0),
+          item['response'][1]['methods'].length>1?
           Text(
             item['response'][1]['methods'][1]['name'],
             style: GoogleFonts.poppins(
@@ -108,7 +113,7 @@ class HistoryCard extends StatelessWidget {
             ),
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
-          ),
+          ):const SizedBox(height: 0),
         ],
       ),
     );
