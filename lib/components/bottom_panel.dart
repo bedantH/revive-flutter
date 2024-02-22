@@ -14,10 +14,13 @@ class BottomPanel extends StatefulWidget {
   final List<Map<String, dynamic>> vid_res;
   final List<dynamic> prevResult;
 
-  const BottomPanel({super.key, required this.scrollController, required this.panelController,
-    required this.res, required this.prevResult, required this.vid_res
-  });
-
+  const BottomPanel(
+      {super.key,
+      required this.scrollController,
+      required this.panelController,
+      required this.res,
+      required this.prevResult,
+      required this.vid_res});
 
   @override
   State<BottomPanel> createState() => _BottomPanelState();
@@ -94,7 +97,7 @@ class _BottomPanelState extends State<BottomPanel> {
                                 });
                               },
                               bgColor: activeIndex == index
-                                  ? const Color(0xFF57b278)
+                                  ? const Color(0xff019344)
                                   : const Color(0xFFDCEFE3),
                               iconColor: activeIndex == index
                                   ? const Color(0xFFFFFFFF)
@@ -119,14 +122,16 @@ class _BottomPanelState extends State<BottomPanel> {
                       });
                     },
                     children: [
-
-                      SearchLayout(scrollController: widget.scrollController,
-                          details:widget.res,
-                          videos: widget.vid_res,
+                      SearchLayout(
+                        scrollController: widget.scrollController,
+                        details: widget.res,
+                        videos: widget.vid_res,
                       ),
-                      LocationsLayout(scrollController: widget.scrollController),
-                      HistoryLayout(scrollController: widget.scrollController, prevResult: widget.prevResult),
-
+                      LocationsLayout(
+                          scrollController: widget.scrollController),
+                      HistoryLayout(
+                          scrollController: widget.scrollController,
+                          prevResult: widget.prevResult),
                       Container(color: Colors.green),
                     ],
                   ),

@@ -12,7 +12,6 @@ import 'package:revive/components/bottom_panel.dart';
 import 'package:revive/components/common/loading.dart';
 import 'package:revive/components/header.dart';
 import 'package:revive/components/search_button.dart';
-import 'package:revive/components/utils.dart';
 import 'package:revive/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -75,7 +74,9 @@ class _CameraAppState extends State<CameraApp> {
         return;
       }
       var temp = jsonDecode((await _prefs).getString('history') ?? "[]");
-      print(temp.length);
+      if (kDebugMode) {
+        print(temp.length);
+      }
       var len = temp.length;
       if (len > 0) {
         Fluttertoast.showToast(
@@ -188,7 +189,7 @@ class _CameraAppState extends State<CameraApp> {
                                   Utils(context).startLoading();
 
                                   Response response = await dio.post(
-                                      'https://2c91-103-206-180-90.ngrok-free.app/ai/response/all/',
+                                      'https://revive-ai-be.onrender.com/ai/response/all/',
                                       options: Options(headers: {
                                         HttpHeaders.contentTypeHeader:
                                             "application/json"
@@ -209,8 +210,10 @@ class _CameraAppState extends State<CameraApp> {
                                     }
 
                                     Response videos = await dio.get(
-                                        'https://2c91-103-206-180-90.ngrok-free.app/search?q=recycle ${response.data['data']['object']}');
-                                    print(response.data['data']['object']);
+                                        'https://revive-ai-be.onrender.com/search?q=recycle ${response.data['data']['object']}');
+                                    if (kDebugMode) {
+                                      print(response.data['data']['object']);
+                                    }
 
                                     setState(() {
                                       isLoading = false;
