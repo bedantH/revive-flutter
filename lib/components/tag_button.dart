@@ -27,15 +27,13 @@ class TagButton extends StatelessWidget {
       child: Container(
           margin: index == 0
               ? const EdgeInsets.only(left: 20.0)
-              : index == 3
+              : index == 2
                   ? const EdgeInsets.only(left: 10.0, right: 20.0)
                   : const EdgeInsets.only(left: 10.0),
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
             color: bgColor,
             borderRadius: BorderRadius.circular(20.0),
-
-
           ),
           child: Padding(
             padding:

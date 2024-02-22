@@ -49,7 +49,7 @@ class SearchLayout extends StatelessWidget {
                           fontSize: 16.0,
                           fontWeight: FontWeight.w500)),
                 )
-              : emptyState(),
+              : const EmptyStateWidget(),
           Container(
             height: 100.0,
             margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
@@ -172,28 +172,37 @@ class SearchLayout extends StatelessWidget {
       ),
     );
   }
-
-  Widget emptyState() => const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image(image: AssetImage("images/empty_state_search.png")),
-            SizedBox(
-              height: 40,
-            ),
-            SizedBox(
-              width: 300,
-              child: Text("Not sure what's recyclable? No worries! Just click an image and we'll be your recycling guide.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0x80000000),
-                    fontWeight: FontWeight.w500
-
-                ),),
-            ),
-
-          ],
-        ),
-      );
 }
+
+
+class EmptyStateWidget extends StatelessWidget {
+  const EmptyStateWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child:Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image(image: AssetImage("images/empty_state_search.png")),
+          SizedBox(
+            height: 40,
+          ),
+          SizedBox(
+            width: 300,
+            child: Text("Not sure what's recyclable? No worries! Just click an image and we'll be your recycling guide.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 16,
+                  color: Color(0x80000000),
+                  fontWeight: FontWeight.w500
+
+              ),),
+          ),
+
+        ],
+      ),
+    );
+  }
+}
+

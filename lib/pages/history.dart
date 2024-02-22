@@ -3,51 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:revive/components/common/history_card.dart';
 
-List<Map<String, dynamic>> recyclingCenters = [
-  {
-    "name": "Panvel Municipal Corporation Recycling Center",
-    "address": "Plot No. 123, Sector 4, Panvel, Maharashtra 410206",
-    "distance": "1.5 km",
-    "contact": "022-27412345",
-    "map_link": "https://goo.gl/maps/9h12345678"
-  },
-  {
-    "name": "Shree Ganesh Recycling Center",
-    "address": "Plot No. 456, Sector 5, Panvel, Maharashtra 410206",
-    "distance": "2.5 km",
-    "contact": "022-27412345",
-    "map_link": "https://goo.gl/maps/9h12345678"
-  },
-  {
-    "name": "Shree Ganesh Recycling Center",
-    "address": "Plot No. 456, Sector 5, Panvel, Maharashtra 410206",
-    "distance": "2.5 km",
-    "contact": "022-27412345",
-    "map_link": "https://goo.gl/maps/9h12345678"
-  },
-  {
-    "name": "Shree Ganesh Recycling Center",
-    "address": "Plot No. 456, Sector 5, Panvel, Maharashtra 410206",
-    "distance": "2.5 km",
-    "contact": "022-27412345",
-    "map_link": "https://goo.gl/maps/9h12345678"
-  },
-  {
-    "name": "Shree Ganesh Recycling Center",
-    "address": "Plot No. 456, Sector 5, Panvel, Maharashtra 410206",
-    "distance": "2.5 km",
-    "contact": "022-27412345",
-    "map_link": "https://goo.gl/maps/9h12345678"
-  },
-  {
-    "name": "Shree Ganesh Recycling Center",
-    "address": "Plot No. 456, Sector 5, Panvel, Maharashtra 410206",
-    "distance": "2.5 km",
-    "contact": "022-27412345",
-    "map_link": "https://goo.gl/maps/9h12345678"
-  }
-];
-
 class HistoryLayout extends StatelessWidget {
   final ScrollController scrollController;
   final List<dynamic> prevResult;
@@ -106,7 +61,6 @@ class HistoryLayout extends StatelessWidget {
             : EmptyStateWidget());
   }
 }
-
 class EmptyStateWidget extends StatelessWidget {
   const EmptyStateWidget({super.key});
 
@@ -122,7 +76,7 @@ class EmptyStateWidget extends StatelessWidget {
           ),
           SizedBox(
             width: 300,
-            child: Text("Not sure what's recyclable? No worries! Just click an image and we'll be your recycling guide.",
+            child: Text("Looks like you haven't scanned anything yet!",
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 16,
