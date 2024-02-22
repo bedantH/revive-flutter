@@ -119,7 +119,7 @@ class _CameraAppState extends State<CameraApp> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: SlidingUpPanel(
             controller: panelController,
-            color: const Color(0xFF8DA179),
+            color: const Color(0xFFFFFFFF),
             panelBuilder: (ScrollController controller) => BottomPanel(
                   res: res,
                   vid_res: vid_res,
@@ -201,9 +201,8 @@ class _CameraAppState extends State<CameraApp> {
                                     Utils(context).stopLoading();
                                     if (kDebugMode) {
                                       print(
-                                        "Response: ${response.data["message"]}");
+                                          "Response: ${response.data["message"]}");
                                       print(response.data['data']);
-
                                     }
 
                                     Response videos = await dio.get(

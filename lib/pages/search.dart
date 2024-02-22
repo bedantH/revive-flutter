@@ -1,12 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:revive/components/common/location_card.dart';
 import 'package:revive/components/video_card.dart';
-import 'package:url_launcher/link.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SearchLayout extends StatelessWidget {
   final ScrollController scrollController;
@@ -26,34 +20,36 @@ class SearchLayout extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Icon(
-                Icons.search,
-                color: Color(0xFF12372A),
-              ),
-              const SizedBox(width: 10.0),
-              Text(
-                "Search",
-                style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                        color: Color(0xFF12372A),
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w500)),
-              ),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     const Icon(
+          //       Icons.search,
+          //       color: Color(0xFF12372A),
+          //     ),
+          //     const SizedBox(width: 10.0),
+          //     Text(
+          //       "Search",
+          //       style: GoogleFonts.poppins(
+          //           textStyle: const TextStyle(
+          //               color: Color(0xFF12372A),
+          //               fontSize: 16.0,
+          //               fontWeight: FontWeight.w500)),
+          //     ),
+          //   ],
+          // ),
           const SizedBox(
             height: 10,
           ),
-          Text(
-            "Related Videos",
-            style: GoogleFonts.poppins(
-                textStyle: const TextStyle(
-                    color: Color(0xFF12372A),
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w500)),
-          ),
+          videos.length > 1
+              ? Text(
+                  "Related Videos",
+                  style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                          color: Color(0xFF12372A),
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500)),
+                )
+              : emptyState(),
           Container(
             height: 100.0,
             margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
@@ -176,4 +172,28 @@ class SearchLayout extends StatelessWidget {
       ),
     );
   }
+
+  Widget emptyState() => const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(image: AssetImage("images/empty_state_search.png")),
+            SizedBox(
+              height: 40,
+            ),
+            SizedBox(
+              width: 300,
+              child: Text("Not sure what's recyclable? No worries! Just click an image and we'll be your recycling guide.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 16,
+                    color: Color(0x80000000),
+                    fontWeight: FontWeight.w500
+
+                ),),
+            ),
+
+          ],
+        ),
+      );
 }

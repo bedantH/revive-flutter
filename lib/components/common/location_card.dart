@@ -1,4 +1,4 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -9,13 +9,13 @@ class LocationCard extends StatelessWidget {
   final String contact;
   final String mapLink;
 
-  const LocationCard({super.key,
-    required this.name,
-    required this.address,
-    required this.distance,
-    required this.contact,
-    required this.mapLink
-  });
+  const LocationCard(
+      {super.key,
+      required this.name,
+      required this.address,
+      required this.distance,
+      required this.contact,
+      required this.mapLink});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,7 @@ class LocationCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
         color: Colors.white,
-        border: Border.all(color: const Color(0x1F019344)
-        ),
+        border: Border.all(color: const Color(0x1F019344)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,12 +33,10 @@ class LocationCard extends StatelessWidget {
           Text(
             name,
             style: GoogleFonts.poppins(
-              textStyle: const TextStyle(
-                  color: Color(0xFF12372A),
-                  fontSize: 16.0,
-                fontWeight: FontWeight.w500
-              )
-            ),
+                textStyle: const TextStyle(
+                    color: Color(0xFF12372A),
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w500)),
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
           ),
@@ -50,9 +47,7 @@ class LocationCard extends StatelessWidget {
                 textStyle: const TextStyle(
                     color: Color(0xFF12372A),
                     fontSize: 13.0,
-                    fontWeight: FontWeight.w400
-                )
-            ),
+                    fontWeight: FontWeight.w400)),
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
           ),
@@ -60,18 +55,15 @@ class LocationCard extends StatelessWidget {
             margin: const EdgeInsets.symmetric(vertical: 4.0),
             padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
             decoration: BoxDecoration(
-              color: const Color(0xFF12372A),
-              borderRadius: BorderRadius.circular(12.0)
-            ),
+                color: const Color(0xFF12372A),
+                borderRadius: BorderRadius.circular(12.0)),
             child: Text(
               distance,
               style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                       color: Colors.white,
                       fontSize: 12.0,
-                      fontWeight: FontWeight.w400
-                  )
-              ),
+                      fontWeight: FontWeight.w400)),
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
             ),
@@ -79,7 +71,11 @@ class LocationCard extends StatelessWidget {
           const SizedBox(height: 20),
           Row(
             children: [
-              const Icon(Icons.phone, color: Color(0xFF12372A), size: 18,),
+              const Icon(
+                Icons.phone,
+                color: Color(0xFF12372A),
+                size: 18,
+              ),
               const SizedBox(width: 10.0),
               Text(
                 contact,
@@ -87,9 +83,7 @@ class LocationCard extends StatelessWidget {
                     textStyle: const TextStyle(
                         color: Color(0xFF12372A),
                         fontSize: 13.0,
-                        fontWeight: FontWeight.w400
-                    )
-                ),
+                        fontWeight: FontWeight.w400)),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),
@@ -98,7 +92,11 @@ class LocationCard extends StatelessWidget {
           const SizedBox(height: 10),
           Row(
             children: [
-              const Icon(Icons.location_on_outlined, color: Color(0xFF12372A), size: 18,),
+              const Icon(
+                Icons.location_on_outlined,
+                color: Color(0xFF12372A),
+                size: 18,
+              ),
               const SizedBox(width: 10.0),
               GestureDetector(
                 onTap: () {
@@ -111,9 +109,7 @@ class LocationCard extends StatelessWidget {
                           color: Color(0xFF12372A),
                           fontSize: 13.0,
                           fontWeight: FontWeight.w400,
-                          decoration: TextDecoration.underline
-                      )
-                  ),
+                          decoration: TextDecoration.underline)),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),

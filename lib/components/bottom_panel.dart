@@ -98,7 +98,7 @@ class _BottomPanelState extends State<BottomPanel> {
                               },
                               bgColor: activeIndex == index
                                   ? const Color(0xff019344)
-                                  : const Color(0xFFDCEFE3),
+                                  : const Color(0x1A019344),
                               iconColor: activeIndex == index
                                   ? const Color(0xFFFFFFFF)
                                   : const Color(0xFF2CB57B),
@@ -162,4 +162,6 @@ class _BottomPanelState extends State<BottomPanel> {
           ),
         ),
       );
+
+
 }

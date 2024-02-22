@@ -25,6 +25,8 @@ class HistoryCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
         color: Colors.white,
+        border: Border.all(color: const Color(0x1F019344)
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -70,6 +70,8 @@ flutter:
   assets:
      - images/carbon_sprout.png
      - images/scan.png
+     - images/empty_state_search.png
+     - images/empty_state_inbox.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
