@@ -151,9 +151,6 @@ class _CameraAppState extends State<CameraApp> {
                       height: 260,
                       left: 50,
                       child: Image(image: AssetImage("images/scan.png"))),
-                  isLoading
-                      ? const Positioned(child: Loading())
-                      : const SizedBox(),
                   Positioned(
                       bottom: 130,
                       right: 150,

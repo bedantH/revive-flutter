@@ -8,14 +8,13 @@ class HorizontalItemWidget extends StatelessWidget {
   final int index;
   final String videoId;
 
-  const HorizontalItemWidget({
-    super.key,
-    required this.videoId,
-    required this.imageUrl,
-    required this.title,
-    required this.description,
-    required this.index
-  });
+  const HorizontalItemWidget(
+      {super.key,
+      required this.videoId,
+      required this.imageUrl,
+      required this.title,
+      required this.description,
+      required this.index});
 
   Future<void> _launchURL(String url) async {
     Uri uri = Uri.parse(url);
@@ -36,11 +35,17 @@ class HorizontalItemWidget extends StatelessWidget {
       child: Container(
         width: 320.0,
         padding: const EdgeInsets.all(10.0),
-        margin:  index == 0 ? const EdgeInsets.only(left: 0.0) : const EdgeInsets.only(left: 10.0),
+        margin: index == 0
+            ? const EdgeInsets.only(left: 0.0)
+            : const EdgeInsets.only(left: 10.0),
         decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(10.0)
-        ),
+            borderRadius: BorderRadius.circular(10.0),
+            border: Border.all(color: const Color(0x1F019344)
+            ),
+        )
+
+        ,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,

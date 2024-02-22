@@ -34,6 +34,8 @@ class TagButton extends StatelessWidget {
           decoration: BoxDecoration(
             color: bgColor,
             borderRadius: BorderRadius.circular(20.0),
+
+
           ),
           child: Padding(
             padding:

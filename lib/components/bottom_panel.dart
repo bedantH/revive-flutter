@@ -157,7 +157,8 @@ class _BottomPanelState extends State<BottomPanel> {
             height: 5,
             margin: const EdgeInsets.only(top: 10),
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(20.0)),
+                color: const Color(0x38000000),
+                borderRadius: BorderRadius.circular(20.0)),
           ),
         ),
       );
