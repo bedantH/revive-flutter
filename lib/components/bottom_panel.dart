@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:revive/components/tag_button.dart';
+import 'package:revive/pages/history.dart';
 import 'package:revive/pages/locations.dart';
 import 'package:revive/pages/search.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -10,12 +11,13 @@ class BottomPanel extends StatefulWidget {
   final PanelController panelController;
   final ScrollController scrollController;
   final List<Map<String, dynamic>> res;
+  final List<Map<String, dynamic>> vid_res;
+  final List<dynamic> prevResult;
 
-  const BottomPanel(
-      {super.key,
-      required this.scrollController,
-      required this.panelController,
-      required this.res});
+  const BottomPanel({super.key, required this.scrollController, required this.panelController,
+    required this.res, required this.prevResult, required this.vid_res
+  });
+
 
   @override
   State<BottomPanel> createState() => _BottomPanelState();
@@ -117,12 +119,14 @@ class _BottomPanelState extends State<BottomPanel> {
                       });
                     },
                     children: [
-                      SearchLayout(
-                          scrollController: widget.scrollController,
-                          details: widget.res),
-                      LocationsLayout(
-                          scrollController: widget.scrollController),
-                      Container(color: Colors.blue),
+
+                      SearchLayout(scrollController: widget.scrollController,
+                          details:widget.res,
+                          videos: widget.vid_res,
+                      ),
+                      LocationsLayout(scrollController: widget.scrollController),
+                      HistoryLayout(scrollController: widget.scrollController, prevResult: widget.prevResult),
+
                       Container(color: Colors.green),
                     ],
                   ),

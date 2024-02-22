@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:revive/components/bottom_panel.dart';
 import 'package:revive/components/common/loading.dart';
@@ -13,7 +14,9 @@ import 'package:revive/components/header.dart';
 import 'package:revive/components/search_button.dart';
 import 'package:revive/components/utils.dart';
 import 'package:revive/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:uuid/uuid.dart';
 
 late List<CameraDescription> cameras;
 Future<void> main() async {
@@ -58,17 +61,36 @@ class _CameraAppState extends State<CameraApp> {
   bool isLoading = false;
   late final dio;
   List<Map<String, dynamic>> res = [];
+  List<Map<String, dynamic>> vid_res = [];
+  List<dynamic> prevResults = [];
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   @override
   void initState() {
     dio = Dio();
     super.initState();
     _controller = CameraController(cameras[0], ResolutionPreset.max);
-    _controller.initialize().then((_) {
+    _controller.initialize().then((_) async {
       if (!mounted) {
         return;
       }
-      setState(() {});
+      var temp = jsonDecode((await _prefs).getString('history') ?? "[]");
+      print(temp.length);
+      var len = temp.length;
+      if (len > 0) {
+        Fluttertoast.showToast(
+            msg:
+                "You have scanned $len items, please visit past scans for further information.",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.TOP_RIGHT,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.white,
+            textColor: Colors.black,
+            fontSize: 16.0);
+      }
+      setState(() {
+        prevResults = temp;
+      });
     }).catchError((Object e) {
       if (e is CameraException) {
         switch (e.code) {
@@ -96,9 +118,11 @@ class _CameraAppState extends State<CameraApp> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: SlidingUpPanel(
             controller: panelController,
-            color: const Color(0x15FFFFFF),
+            color: const Color(0xFF8DA179),
             panelBuilder: (ScrollController controller) => BottomPanel(
                   res: res,
+                  vid_res: vid_res,
+                  prevResult: prevResults,
                   scrollController: controller,
                   panelController: panelController,
                 ),
@@ -126,6 +150,9 @@ class _CameraAppState extends State<CameraApp> {
                       height: 260,
                       left: 50,
                       child: Image(image: AssetImage("images/scan.png"))),
+                  isLoading
+                      ? const Positioned(child: Loading())
+                      : const SizedBox(),
                   Positioned(
                       bottom: 130,
                       right: 150,
@@ -147,7 +174,6 @@ class _CameraAppState extends State<CameraApp> {
                               try {
                                 await _controller.setFlashMode(FlashMode.off);
                                 XFile pic = await _controller.takePicture();
-
                                 List<int> imageBytes = await pic.readAsBytes();
                                 String base64Image = base64Encode(imageBytes);
                                 setState(() {
@@ -161,7 +187,6 @@ class _CameraAppState extends State<CameraApp> {
                                   });
                                   Utils(context).startLoading();
 
-                                  return;
                                   Response response = await dio.post(
                                       'https://2c91-103-206-180-90.ngrok-free.app/ai/response/all/',
                                       options: Options(headers: {
@@ -173,17 +198,20 @@ class _CameraAppState extends State<CameraApp> {
                                         "mimeType": "image/jpeg",
                                         "image": base64Image,
                                       });
-                                  Utils(context).stopLoading();
 
                                   if (response.data.toString() != "") {
-                                    hasSearched = true;
+                                    Utils(context).stopLoading();
                                     if (kDebugMode) {
                                       print(
-                                          "Response: ${response.data["message"]}");
-                                    }
-                                    if (kDebugMode) {
+                                        "Response: ${response.data["message"]}");
                                       print(response.data['data']);
+
                                     }
+
+                                    Response videos = await dio.get(
+                                        'https://2c91-103-206-180-90.ngrok-free.app/search?q=recycle ${response.data['data']['object']}');
+                                    print(response.data['data']['object']);
+
                                     setState(() {
                                       isLoading = false;
                                       if (response.data["code"] == 200) {
@@ -202,26 +230,44 @@ class _CameraAppState extends State<CameraApp> {
                                                   ["reusing_methods"]
                                             ]
                                           },
-                                          {
-                                            "title":
-                                                'nearest recycling stations',
-                                            "station": [
-                                              ...response.data['data']
-                                                  ["nearest_recycling_stations"]
-                                            ]
-                                          },
                                         ];
-                                        if (kDebugMode) {
-                                          print(res);
-                                        }
+                                      }
+
+                                      if (videos.statusCode == 200) {
+                                        vid_res = [...videos.data["items"]];
+                                        print(vid_res);
                                       }
                                     });
+                                    try {
+                                      var temp = jsonDecode(
+                                          (await _prefs).getString('history') ??
+                                              "[]");
+                                      var uuid = Uuid();
+                                      temp = [
+                                        {
+                                          "id": uuid.v4(),
+                                          "name": response.data['data']
+                                              ['object'],
+                                          "response": res,
+                                          "complete": false,
+                                        },
+                                        ...temp
+                                      ];
+                                      setState(() {
+                                        prevResults = temp;
+                                      });
+                                      print(temp.length);
+                                      (await _prefs).setString(
+                                          'history', jsonEncode(temp));
+                                      // jsonEncode(response.data)
+                                    } catch (e) {
+                                      print(
+                                          "Error storing response in Shared Preferences: $e");
+                                    }
                                     panelController.open();
                                   }
                                 } catch (e) {
-                                  if (kDebugMode) {
-                                    print("Error: $e");
-                                  }
+                                  print("Error: $e");
                                 }
                               } on CameraException catch (e) {
                                 debugPrint("Error: $e");
