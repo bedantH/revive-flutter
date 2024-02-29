@@ -48,7 +48,7 @@ Scan something by clicking search
 
 
 Results
-<div style="display:flex;gap:30px;flex-wrap:wrap;">
+<div style="display:flex;gap:30px;flex-wrap:wrap;justify-content:space-evenly">
   <img height="700" src="https://cdn.discordapp.com/attachments/1091999644923473920/1212799851385856051/Screenshot_2024-02-29_at_10.01.46_PM.png?ex=65f326e1&is=65e0b1e1&hm=672c08b69ad73438b070f943a4ec881522c0b3528267d05e13ae0b24ea916bf5&" alt="sc1">
   <img height="700" src="https://cdn.discordapp.com/attachments/1091999644923473920/1212799871971758100/Screenshot_2024-02-29_at_10.02.41_PM.png?ex=65f326e6&is=65e0b1e6&hm=3135f018fce6c460e54565e31e314f046927d6865b63d26f76707e61c440fbd8&" alt="sc2">
   <img height="700" src="https://cdn.discordapp.com/attachments/1091999644923473920/1212799893958033448/Screenshot_2024-02-29_at_10.03.15_PM.png?ex=65f326eb&is=65e0b1eb&hm=3b637ebccd32561c8c0c4b2f659aaea3c1577f89315fc897c3449612f1880961&" alt="sc3">
