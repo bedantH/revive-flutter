@@ -32,11 +32,6 @@ Once the select device has loaded click on the run button
 ![run the project](https://cdn.discordapp.com/attachments/1091999644923473920/1212793147239702608/Screenshot_2024-02-29_at_9.36.08_PM.png?ex=65f320a2&is=65e0aba2&hm=1f62cd1ea160919a01b2eff366da6e49096bca6c3ce7038b97be8b1654a7c315&)
 
 
-The app should successfully load on the device!!
-
-![run the project](https://cdn.discordapp.com/attachments/1091999644923473920/1212793147239702608/Screenshot_2024-02-29_at_9.36.08_PM.png?ex=65f320a2&is=65e0aba2&hm=1f62cd1ea160919a01b2eff366da6e49096bca6c3ce7038b97be8b1654a7c315&)
-
-
 The app should successfully run on the selected device
 
 ![running project](https://cdn.discordapp.com/attachments/1091999644923473920/1212796820409815162/Screenshot_2024-02-29_at_9.50.44_PM.png?ex=65f3240e&is=65e0af0e&hm=8e708477a9f9871a484ea79593b23c47f79b20391d876cabadb9dde49ee1e94b&)
